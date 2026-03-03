@@ -13,6 +13,16 @@ const screens = {
 };
 const bgm = document.getElementById("bgm");
 
+// Image load fallback
+const splashImg = document.querySelector('#splashScreen img');
+const menuImg = document.querySelector('#menuScreen img');
+[splashImg, menuImg].forEach((img) => {
+  if (!img) return;
+  img.addEventListener("error", () => {
+    console.warn("Asset not found:", img.getAttribute("src"));
+  });
+});
+
 let bgmStarted = false;
 function ensureBgm() {
   if (bgmStarted) return;

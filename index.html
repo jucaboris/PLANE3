@@ -84,7 +84,7 @@
       z-index:9999; opacity:1; transition:opacity .35s ease; }
     .screen.hidden{display:none;}
     .screen.fadingOut{opacity:0;}
-    .screenFrame{position:relative; width:min(920px, 92vw); aspect-ratio: 4 / 3;
+    .screenFrame{position:relative; width:min(920px, 92vw); aspect-ratio: 16 / 9;
       border-radius:18px; border:1px solid rgba(255,255,255,.18);
       background:rgba(0,0,0,.25); box-shadow:0 18px 50px rgba(0,0,0,.55);
       overflow:hidden;}
@@ -103,28 +103,44 @@
     .menuNote{position:absolute; top:14px; right:16px; font-family:var(--mono);
       color:rgba(214,230,242,.75); font-size:11px;}
 
+
+    /* Hotspot buttons (clickable areas on the menu image) */
+    .hotspots{position:absolute; inset:0; pointer-events:auto;}
+    .hotspot{position:absolute; background:transparent; border:0; padding:0; margin:0;
+      cursor:pointer; outline:none;}
+    .hotspot:focus{box-shadow:0 0 0 2px rgba(125,211,252,.75);}
+    .hotspot:hover{box-shadow:0 0 0 2px rgba(125,211,252,.35) inset;}
+    /* Positions derived from the original 2048x1152 mockup */
+    .hs-start{left:24.66%; top:81.68%; width:13.87%; height:6.0%;}
+    .hs-continue{left:40.03%; top:81.68%; width:13.20%; height:6.0%;}
+    .hs-help{left:54.64%; top:81.68%; width:13.20%; height:6.0%;}
+    .hs-exit{left:69.10%; top:81.68%; width:13.60%; height:6.0%;}
+
 </style>
 </head>
 <body>
-  <audio id="bgm" src="./assets/music.mp3" loop preload="auto"></audio>
+  <audio id="bgm" src="assets/music.mp3" loop preload="auto"></audio>
 
   <div id="splashScreen" class="screen">
     <div class="screenFrame">
-      <img class="screenImg" src="./assets/splash.png" alt="Splash" />
+      <img class="screenImg" src="assets/splash.png" alt="Splash" />
       <div class="screenHint">Clique para continuar</div>
     </div>
   </div>
 
   <div id="menuScreen" class="screen hidden">
     <div class="screenFrame">
-      <img class="screenImg" src="./assets/menu.png" alt="Menu" />
-      <div class="menuOverlay">
-        <button class="menuBtn menuBtnRed" id="menuStart">INICIAR</button>
-        <button class="menuBtn" id="menuContinue">CONTINUAR</button>
-        <button class="menuBtn" id="menuHelp">INSTRUÇÕES</button>
-        <button class="menuBtn" id="menuExit">SAIR</button>
+      <img class="screenImg" src="assets/menu.png" alt="Menu" />
+      
+      <div class="hotspots" aria-hidden="false">
+        <!-- Hotspots aligned to the menu image (percent-based) -->
+        <button class="hotspot hs-start" id="menuStart" aria-label="Iniciar"></button>
+        <button class="hotspot hs-continue" id="menuContinue" aria-label="Continuar"></button>
+        <button class="hotspot hs-help" id="menuHelp" aria-label="Instruções"></button>
+        <button class="hotspot hs-exit" id="menuExit" aria-label="Sair"></button>
       </div>
       <div class="menuNote" id="menuNote"></div>
+
     </div>
   </div>
 
